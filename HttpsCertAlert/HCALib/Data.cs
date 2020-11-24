@@ -10,7 +10,9 @@ namespace HCALib
 {
     public class Data
     {
+
         private string _fileName;
+        private object _saveFileLock = new object();
 
         [XmlAttribute]
         public int CheckIntervalHours { get; set; }
@@ -53,13 +55,21 @@ namespace HCALib
 
         public void Save()
         {
-            DT = DateTime.UtcNow;
-            SerializeToFile(this, _fileName);
+            lock (_saveFileLock)
+            {
+                DT = DateTime.UtcNow;
+                SerializeToFile(this, _fileName);
+            }
         }
 
 
         private static void SerializeToFile(object obj, string fileName)
         {
+            if (File.Exists(fileName))
+            {
+                File.Copy(fileName, fileName + ".bak", true);
+            }
+
             XmlSerializer xs = new XmlSerializer(obj.GetType());
             XmlSerializerNamespaces xsn = new XmlSerializerNamespaces();
             xsn.Add(string.Empty, string.Empty);

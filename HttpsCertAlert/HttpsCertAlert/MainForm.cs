@@ -74,12 +74,13 @@ namespace HttpsCertAlert
                         URL = x.Url,
                         Status = x.Status,
                         LastCheck = x.LastCheckDT,
-                        ExpirationDelta = (x.ValidToDT != DateTime.MinValue) ?
+                        ExpirationDays = (x.ValidToDT != DateTime.MinValue) ?
                                           (int?)DateTime.UtcNow.Subtract(x.ValidToDT).TotalDays :
                                           null,
                         x.LastError
                     })
-                .OrderBy(x => x.ExpirationDelta)
+                .OrderByDescending(x=>x.Status)
+                .ThenByDescending(x => x.ExpirationDays)
                 .ToList();
 
             if (position > 0)

@@ -45,7 +45,7 @@
             this.dataGridView1.Name = "dataGridView1";
             this.dataGridView1.ReadOnly = true;
             this.dataGridView1.RowHeadersWidth = 51;
-            this.dataGridView1.Size = new System.Drawing.Size(790, 308);
+            this.dataGridView1.Size = new System.Drawing.Size(996, 364);
             this.dataGridView1.TabIndex = 1;
             // 
             // updateGUITimer
@@ -64,7 +64,7 @@
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(872, 426);
+            this.ClientSize = new System.Drawing.Size(1025, 426);
             this.Controls.Add(this.dataGridView1);
             this.Margin = new System.Windows.Forms.Padding(4);
             this.Name = "MainForm";
