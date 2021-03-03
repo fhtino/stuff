@@ -77,20 +77,24 @@ namespace HttpsCertAlert
                         ExpirationDays = (x.ValidToDT != DateTime.MinValue) ?
                                           (int?)DateTime.UtcNow.Subtract(x.ValidToDT).TotalDays :
                                           null,
+                        ValidTo = x.ValidToDT,
                         x.LastError
                     })
-                .OrderByDescending(x=>x.Status)
+                .OrderByDescending(x => x.Status)
                 .ThenByDescending(x => x.ExpirationDays)
                 .ToList();
 
             if (position > 0)
                 dataGridView1.FirstDisplayedScrollingRowIndex = position;
         }
-        
+
 
         private void updateGUITimer_Tick(object sender, EventArgs e)
         {
-            UpdateGrid();
+            if (cbAutoRefresh.Checked)
+            {
+                UpdateGrid();
+            }
 
             _iconAnimationFlag = !_iconAnimationFlag;
 
