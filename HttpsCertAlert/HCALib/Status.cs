@@ -13,5 +13,6 @@ namespace HCALib
         EXPIRING,
         EXPIRED,
         ERROR,
+        OLD_DATA
     }
 }

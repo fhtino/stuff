@@ -1,9 +1,9 @@
 ﻿<?xml version="1.0"?>
 <Data CheckIntervalHours="1" DT="2000-01-01T00:00:00.000Z" ContinuousCheck="true">
-  <CheckList>
-    <HttpsCheck Url="https://www.google.com" Active="true" AlertDays="100"   />
-    <HttpsCheck Url="https://www.microsoft.com" Active="true" AlertDays="100"   />
-    <HttpsCheck Url="https://expired.badssl.com" Active="true" AlertDays="10"   />
-    <HttpsCheck Url="https://doesnotexist.local:12345" Active="true" AlertDays="10"  />
-  </CheckList>
+	<CheckList>		
+		<HttpsCheck Url="https://www.google.com" Active="true" AlertDays="100"   />
+		<HttpsCheck Url="https://www.microsoft.com" Active="true" AlertDays="100"   />
+		<HttpsCheck Url="https://expired.badssl.com" Active="true" AlertDays="10"   />
+		<HttpsCheck Url="https://doesnotexist.local:12345" Active="true" AlertDays="10"  />
+	</CheckList>
 </Data>

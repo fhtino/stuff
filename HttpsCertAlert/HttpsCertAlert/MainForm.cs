@@ -7,6 +7,7 @@ using System.Data;
 using System.Drawing;
 using System.IO;
 using System.Linq;
+using System.Reflection;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
@@ -35,6 +36,8 @@ namespace HttpsCertAlert
             this.Icon = Properties.Resources.world_blue;
             notifyIcon.Icon = Properties.Resources.lock_blue;
             notifyIcon.Visible = true;
+
+            lblVersion.Text = Assembly.GetExecutingAssembly().GetName().Version.ToString();
 
             _data = Data.LoadFromFile("data.xml");
 
@@ -83,6 +86,14 @@ namespace HttpsCertAlert
                 .OrderByDescending(x => x.Status)
                 .ThenByDescending(x => x.ExpirationDays)
                 .ToList();
+
+            dataGridView1.Columns[0].Width = 200;
+            dataGridView1.Columns[1].Width = 80;
+            dataGridView1.Columns[2].Width = 100;
+            dataGridView1.Columns[3].Width = 70;
+            dataGridView1.Columns[3].HeaderText = "Exp.days";
+            dataGridView1.Columns[4].Width = 100;
+            dataGridView1.Columns[5].Width = 200;
 
             if (position > 0)
                 dataGridView1.FirstDisplayedScrollingRowIndex = position;

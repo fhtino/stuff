@@ -20,6 +20,11 @@ namespace HCALib
         /// </summary>
         public static async Task Exec(Data data)
         {
+            foreach (var check in data.CheckList.Where(c => DateTime.UtcNow.Subtract(c.LastCheckDT).TotalHours > data.CheckIntervalHours * 2))
+            {
+                check.Status = Status.OLD_DATA;
+            }
+
             X509Certificate2 myCertificate = null;
 
             var handler = new WebRequestHandler()
@@ -59,7 +64,7 @@ namespace HCALib
                             {
                                 check.Status = Status.OK;
                             }
-                            else if (expirationDays<=check.AlertDays && expirationDays>0)
+                            else if (expirationDays <= check.AlertDays && expirationDays > 0)
                             {
                                 check.Status = Status.EXPIRING;
                             }
@@ -78,7 +83,7 @@ namespace HCALib
                         finally
                         {
                             check.LastCheckDT = DateTime.UtcNow;
-                        }                       
+                        }
                     }
                 }
             }
