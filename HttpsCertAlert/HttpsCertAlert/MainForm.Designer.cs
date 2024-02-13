@@ -34,7 +34,10 @@
             this.notifyIcon = new System.Windows.Forms.NotifyIcon(this.components);
             this.cbAutoRefresh = new System.Windows.Forms.CheckBox();
             this.lblVersion = new System.Windows.Forms.Label();
+            this.statusStrip1 = new System.Windows.Forms.StatusStrip();
+            this.toolStripStatusInfo = new System.Windows.Forms.ToolStripStatusLabel();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).BeginInit();
+            this.statusStrip1.SuspendLayout();
             this.SuspendLayout();
             // 
             // dataGridView1
@@ -52,6 +55,7 @@
             this.dataGridView1.RowHeadersWidth = 30;
             this.dataGridView1.Size = new System.Drawing.Size(1137, 393);
             this.dataGridView1.TabIndex = 1;
+            this.dataGridView1.ColumnHeaderMouseClick += new System.Windows.Forms.DataGridViewCellMouseEventHandler(this.dataGridView1_ColumnHeaderMouseClick);
             // 
             // updateGUITimer
             // 
@@ -87,11 +91,29 @@
             this.lblVersion.TabIndex = 3;
             this.lblVersion.Text = "lblVersion";
             // 
+            // statusStrip1
+            // 
+            this.statusStrip1.ImageScalingSize = new System.Drawing.Size(20, 20);
+            this.statusStrip1.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.toolStripStatusInfo});
+            this.statusStrip1.Location = new System.Drawing.Point(0, 433);
+            this.statusStrip1.Name = "statusStrip1";
+            this.statusStrip1.Size = new System.Drawing.Size(1163, 26);
+            this.statusStrip1.TabIndex = 4;
+            this.statusStrip1.Text = "statusStrip1";
+            // 
+            // toolStripStatusInfo
+            // 
+            this.toolStripStatusInfo.Name = "toolStripStatusInfo";
+            this.toolStripStatusInfo.Size = new System.Drawing.Size(18, 20);
+            this.toolStripStatusInfo.Text = "...";
+            // 
             // MainForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(1163, 459);
+            this.Controls.Add(this.statusStrip1);
             this.Controls.Add(this.lblVersion);
             this.Controls.Add(this.cbAutoRefresh);
             this.Controls.Add(this.dataGridView1);
@@ -102,6 +124,8 @@
             this.Load += new System.EventHandler(this.Form1_Load);
             this.SizeChanged += new System.EventHandler(this.MainForm_SizeChanged);
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).EndInit();
+            this.statusStrip1.ResumeLayout(false);
+            this.statusStrip1.PerformLayout();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -113,6 +137,8 @@
         private System.Windows.Forms.NotifyIcon notifyIcon;
         private System.Windows.Forms.CheckBox cbAutoRefresh;
         private System.Windows.Forms.Label lblVersion;
+        private System.Windows.Forms.StatusStrip statusStrip1;
+        private System.Windows.Forms.ToolStripStatusLabel toolStripStatusInfo;
     }
 }
 

@@ -3,6 +3,7 @@
 	<CheckList>		
 		<HttpsCheck Url="https://www.google.com" Active="true" AlertDays="100"   />
 		<HttpsCheck Url="https://www.microsoft.com" Active="true" AlertDays="100"   />
+		<HttpsCheck Url="https://www.microsoft.it" Active="true" AlertDays="100"   />
 		<HttpsCheck Url="https://expired.badssl.com" Active="true" AlertDays="10"   />
 		<HttpsCheck Url="https://doesnotexist.local:12345" Active="true" AlertDays="10"  />
 	</CheckList>

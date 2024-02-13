@@ -5,9 +5,11 @@ using System.ComponentModel;
 using System.Configuration;
 using System.Data;
 using System.Drawing;
+using System.Globalization;
 using System.IO;
 using System.Linq;
 using System.Reflection;
+using System.Runtime.InteropServices;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
@@ -22,6 +24,8 @@ namespace HttpsCertAlert
         private Data _data;
         private bool _iconAnimationFlag = false;
         private System.Timers.Timer _checkTimer;
+        private string _sortingColumn = null;
+        private bool _sortingOrderAsc = true;
 
 
 
@@ -54,8 +58,10 @@ namespace HttpsCertAlert
         {
             try
             {
-                await Engine.Exec(_data);
+                toolStripStatusInfo.Text = "Processing...";
+                    await Engine.Exec(_data);
                 _data.Save();
+                toolStripStatusInfo.Text = "";
             }
             finally
             {
@@ -70,28 +76,39 @@ namespace HttpsCertAlert
         {
             int position = dataGridView1.FirstDisplayedScrollingRowIndex;
 
-            dataGridView1.DataSource = _data.CheckList
+            var data = _data.CheckList
                 .Select(
                     x => new
                     {
                         URL = x.Url,
                         Status = x.Status,
-                        LastCheck = x.LastCheckDT,
+
                         ExpirationDays = (x.ValidToDT != DateTime.MinValue) ?
                                           (int?)DateTime.UtcNow.Subtract(x.ValidToDT).TotalDays :
                                           null,
                         ValidTo = x.ValidToDT,
+                        LastCheck = x.LastCheckDT,
                         x.LastError
-                    })
-                .OrderByDescending(x => x.Status)
-                .ThenByDescending(x => x.ExpirationDays)
-                .ToList();
+                    });
+
+            if (_sortingColumn == null)
+            {
+                _sortingColumn = "ValidTo";
+                _sortingOrderAsc = true;
+            }
+
+            var dataOrdered = data.OrderBy(x => x.GetType().GetProperty(_sortingColumn).GetValue(x)).ToList();
+            if (!_sortingOrderAsc)
+            {
+                dataOrdered.Reverse();
+            }
+
+            dataGridView1.DataSource = dataOrdered.ToList();
 
             dataGridView1.Columns[0].Width = 200;
-            dataGridView1.Columns[1].Width = 80;
+            dataGridView1.Columns[1].Width = 100;
             dataGridView1.Columns[2].Width = 100;
-            dataGridView1.Columns[3].Width = 70;
-            dataGridView1.Columns[3].HeaderText = "Exp.days";
+            dataGridView1.Columns[3].Width = 100;
             dataGridView1.Columns[4].Width = 100;
             dataGridView1.Columns[5].Width = 200;
 
@@ -146,6 +163,18 @@ namespace HttpsCertAlert
             }
         }
 
+
+        private void dataGridView1_ColumnHeaderMouseClick(object sender, DataGridViewCellMouseEventArgs e)
+        {
+            string newColumnName = dataGridView1.Columns[e.ColumnIndex].DataPropertyName;
+
+            if (newColumnName == _sortingColumn)
+            {
+                _sortingOrderAsc = !_sortingOrderAsc;
+            }
+
+            _sortingColumn = newColumnName;
+        }
 
     }
 
