@@ -13,6 +13,9 @@ namespace HCALib
         public string Url { get; set; }
 
         [XmlAttribute]
+        public string Group { get; set; }
+
+        [XmlAttribute]
         public bool Active { get; set; }
 
         [XmlAttribute]

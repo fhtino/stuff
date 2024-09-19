@@ -11,6 +11,7 @@ using System.Linq;
 using System.Reflection;
 using System.Runtime.InteropServices;
 using System.Text;
+using System.Text.RegularExpressions;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 
@@ -80,6 +81,7 @@ namespace HttpsCertAlert
                 .Select(
                     x => new
                     {
+                        Group = x.Group,
                         URL = x.Url,
                         Status = x.Status,
 
@@ -105,12 +107,13 @@ namespace HttpsCertAlert
 
             dataGridView1.DataSource = dataOrdered.ToList();
 
-            dataGridView1.Columns[0].Width = 200;
-            dataGridView1.Columns[1].Width = 100;
+            dataGridView1.Columns[0].Width = 100;
+            dataGridView1.Columns[1].Width = 200;
             dataGridView1.Columns[2].Width = 100;
             dataGridView1.Columns[3].Width = 100;
             dataGridView1.Columns[4].Width = 100;
-            dataGridView1.Columns[5].Width = 200;
+            dataGridView1.Columns[5].Width = 100;
+            dataGridView1.Columns[6].Width = 200;
 
             if (position > 0)
                 dataGridView1.FirstDisplayedScrollingRowIndex = position;
@@ -174,6 +177,12 @@ namespace HttpsCertAlert
             }
 
             _sortingColumn = newColumnName;
+        }
+
+
+        private void linkToWebSite_LinkClicked(object sender, LinkLabelLinkClickedEventArgs e)
+        {
+            System.Diagnostics.Process.Start("https://github.com/fhtino/stuff");
         }
 
     }

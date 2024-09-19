@@ -36,6 +36,7 @@
             this.lblVersion = new System.Windows.Forms.Label();
             this.statusStrip1 = new System.Windows.Forms.StatusStrip();
             this.toolStripStatusInfo = new System.Windows.Forms.ToolStripStatusLabel();
+            this.linkToWebSite = new System.Windows.Forms.LinkLabel();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).BeginInit();
             this.statusStrip1.SuspendLayout();
             this.SuspendLayout();
@@ -53,7 +54,7 @@
             this.dataGridView1.Name = "dataGridView1";
             this.dataGridView1.ReadOnly = true;
             this.dataGridView1.RowHeadersWidth = 30;
-            this.dataGridView1.Size = new System.Drawing.Size(1137, 393);
+            this.dataGridView1.Size = new System.Drawing.Size(1293, 375);
             this.dataGridView1.TabIndex = 1;
             this.dataGridView1.ColumnHeaderMouseClick += new System.Windows.Forms.DataGridViewCellMouseEventHandler(this.dataGridView1_ColumnHeaderMouseClick);
             // 
@@ -85,7 +86,7 @@
             // 
             this.lblVersion.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
             this.lblVersion.AutoSize = true;
-            this.lblVersion.Location = new System.Drawing.Point(1083, 17);
+            this.lblVersion.Location = new System.Drawing.Point(1239, 17);
             this.lblVersion.Name = "lblVersion";
             this.lblVersion.Size = new System.Drawing.Size(67, 16);
             this.lblVersion.TabIndex = 3;
@@ -96,9 +97,9 @@
             this.statusStrip1.ImageScalingSize = new System.Drawing.Size(20, 20);
             this.statusStrip1.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.toolStripStatusInfo});
-            this.statusStrip1.Location = new System.Drawing.Point(0, 433);
+            this.statusStrip1.Location = new System.Drawing.Point(0, 443);
             this.statusStrip1.Name = "statusStrip1";
-            this.statusStrip1.Size = new System.Drawing.Size(1163, 26);
+            this.statusStrip1.Size = new System.Drawing.Size(1319, 26);
             this.statusStrip1.TabIndex = 4;
             this.statusStrip1.Text = "statusStrip1";
             // 
@@ -108,11 +109,23 @@
             this.toolStripStatusInfo.Size = new System.Drawing.Size(18, 20);
             this.toolStripStatusInfo.Text = "...";
             // 
+            // linkToWebSite
+            // 
+            this.linkToWebSite.AutoSize = true;
+            this.linkToWebSite.Location = new System.Drawing.Point(871, 17);
+            this.linkToWebSite.Name = "linkToWebSite";
+            this.linkToWebSite.Size = new System.Drawing.Size(173, 16);
+            this.linkToWebSite.TabIndex = 5;
+            this.linkToWebSite.TabStop = true;
+            this.linkToWebSite.Text = "https://github.com/fhtino/stuff";
+            this.linkToWebSite.LinkClicked += new System.Windows.Forms.LinkLabelLinkClickedEventHandler(this.linkToWebSite_LinkClicked);
+            // 
             // MainForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(1163, 459);
+            this.ClientSize = new System.Drawing.Size(1319, 469);
+            this.Controls.Add(this.linkToWebSite);
             this.Controls.Add(this.statusStrip1);
             this.Controls.Add(this.lblVersion);
             this.Controls.Add(this.cbAutoRefresh);
@@ -139,6 +152,7 @@
         private System.Windows.Forms.Label lblVersion;
         private System.Windows.Forms.StatusStrip statusStrip1;
         private System.Windows.Forms.ToolStripStatusLabel toolStripStatusInfo;
+        private System.Windows.Forms.LinkLabel linkToWebSite;
     }
 }
 

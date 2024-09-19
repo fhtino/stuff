@@ -1,10 +1,12 @@
 ﻿<?xml version="1.0"?>
-<Data CheckIntervalHours="1" DT="2000-01-01T00:00:00.000Z" ContinuousCheck="true">
-	<CheckList>		
-		<HttpsCheck Url="https://www.google.com" Active="true" AlertDays="100"   />
-		<HttpsCheck Url="https://www.microsoft.com" Active="true" AlertDays="100"   />
-		<HttpsCheck Url="https://www.microsoft.it" Active="true" AlertDays="100"   />
-		<HttpsCheck Url="https://expired.badssl.com" Active="true" AlertDays="10"   />
-		<HttpsCheck Url="https://doesnotexist.local:12345" Active="true" AlertDays="10"  />
+<Data CheckIntervalHours="1" DT="2000-01-01T00:00:00.000Z" ContinuousCheck="false">
+	<CheckList>
+		<HttpsCheck Group="Public" Url="https://www.google.com" Active="true" AlertDays="100"   />
+		<HttpsCheck Group="Public" Url="https://www.microsoft.com" Active="true" AlertDays="100"   />
+		<HttpsCheck Group="Public" Url="https://www.microsoft.it" Active="true" AlertDays="100"   />
+		<HttpsCheck Group="BadOnes" Url="https://expired.badssl.com" Active="true" AlertDays="10"   />
+		<HttpsCheck Group="BadOnes" Url="https://doesnotexist.local:12345" Active="true" AlertDays="10"  />
+		<HttpsCheck Group="Public" Url="https://github.com/" Active="true" AlertDays="10"  />
+		<HttpsCheck Group="Public" Url="https://www.fhtino.it/" Active="true" AlertDays="10"  />
 	</CheckList>
 </Data>
