@@ -1,0 +1,8 @@
+{
+  "profiles": {
+    "HttpStressSimple": {
+      "commandName": "Project",
+      "commandLineArgs": "http://www.fhtino.it 600 5"
+    }
+  }
+}
