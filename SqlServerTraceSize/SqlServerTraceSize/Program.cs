@@ -1,4 +1,5 @@
 ﻿using Microsoft.Data.SqlClient;
+using Microsoft.Extensions.Configuration;
 using OfficeOpenXml;
 using System.Data;
 
@@ -22,7 +23,13 @@ namespace SqlServerTraceSize
         {
             int k = 5;
 
-            string sqlConnString = @"Server=(localdb)\mssqllocaldb;Database=ContosoSales10M;Integrated Security=True;";
+            var configuration = new ConfigurationBuilder()
+               .SetBasePath(Directory.GetCurrentDirectory())
+               .AddJsonFile("appsettings.json", optional: false, reloadOnChange: true)
+               .Build();
+
+            string sqlConnString = configuration.GetConnectionString("SqlServerConnString");
+                       
             string excelFileName = "output.xlsx";
 
             if (File.Exists(excelFileName))
