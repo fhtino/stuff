@@ -1,0 +1,7 @@
+<Solution>
+  <Folder Name="/Solution Items/">
+    <File Path="README.md" />
+  </Folder>
+  <Project Path="PPClient/PPClient.csproj" Id="fc057157-8399-4735-90aa-4e3329390560" />
+  <Project Path="PPServer/PPServer.csproj" Id="83932ae6-5457-43d9-94d3-f153d59ace70" />
+</Solution>
