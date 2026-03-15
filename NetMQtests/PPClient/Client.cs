@@ -7,13 +7,34 @@ namespace PPClient
     {
         public static void Main(string[] args)
         {
-            string serverIP = args.Length> 0 ? args[0] : "localhost";
+            int tcpPort = 7777;
 
-            Console.WriteLine($"Connecting to server at {serverIP}");
+            bool useEncryption = args.Contains("--encryption", StringComparer.OrdinalIgnoreCase);
+            string serverIP = args.FirstOrDefault(arg => arg.StartsWith("--server"))?.Split("=")[1] ?? "localhost";
+            int exitAfter = int.Parse(args.FirstOrDefault(arg => arg.StartsWith("--exitafter"))?.Split("=")[1] ?? "5");
 
+            Console.WriteLine($" - Connecting to server {serverIP} {tcpPort}");
             var client = new PushSocket();
+
+            if (useEncryption)
+            {
+                // set the client certificate
+                var clientCertificate = new NetMQCertificate();
+                client.Options.CurveCertificate = clientCertificate;
+
+                // set the server public key
+                byte[] serverPublicKey = Convert.FromBase64String(File.ReadAllText("../../../../cert_public.key"));
+                client.Options.CurveServerKey = serverPublicKey!;
+                // it's the same as setting CurveServerKey, but more explicit
+                //client.Options.CurveServerCertificate = new NetMQCertificate(new byte[32], serverPublicKey);  
+
+                Console.WriteLine($" - Using Curve encryption:");
+                Console.WriteLine($" - Client public key: {Convert.ToBase64String(clientCertificate.PublicKey)}");
+                Console.WriteLine($" - Server public key: {Convert.ToBase64String(serverPublicKey)}");
+            }
+
             client.Options.SendHighWatermark = 100;  // to limit the number of messages in the output queue
-            client.Connect($"tcp://{serverIP}:7777");
+            client.Connect($"tcp://{serverIP}:{tcpPort}");
 
             int messageCounter = 0;
             int failCounter = 0;
@@ -25,15 +46,17 @@ namespace PPClient
                 bool sendResult = client.TrySendFrame(message);  // does not block, but you can lose messages if output queue is full
                 Console.WriteLine($" sendResult={sendResult}");
                 if (!sendResult) failCounter++;
-                
+
                 Thread.Sleep(1000);
-                
-                if (messageCounter >= 5)
-                    break;                
+
+                if (messageCounter >= exitAfter)
+                    break;
             }
 
             Console.WriteLine("Press a key to exit");
             Console.ReadKey();
         }
+
     }
+
 }

@@ -1,5 +1,7 @@
 <Solution>
   <Folder Name="/Solution Items/">
+    <File Path="cert_public.key" />
+    <File Path="cert_secret.key" />
     <File Path="README.md" />
   </Folder>
   <Project Path="PPClient/PPClient.csproj" Id="fc057157-8399-4735-90aa-4e3329390560" />

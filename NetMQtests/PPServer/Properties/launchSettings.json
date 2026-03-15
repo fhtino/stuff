@@ -1,0 +1,8 @@
+{
+  "profiles": {
+    "PPServer": {
+      "commandName": "Project",
+      "commandLineArgs": "--encryption"
+    }
+  }
+}
